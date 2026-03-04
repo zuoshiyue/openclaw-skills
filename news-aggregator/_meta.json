@@ -1,0 +1,15 @@
+{
+  "name": "news-aggregator",
+  "version": "1.0.0",
+  "description": "新闻聚合与热搜抓取技能",
+  "author": "muse",
+  "created": "2026-03-03",
+  "tags": ["news", "aggregator", "hotlist", "feishu"],
+  "channels": 8,
+  "scripts": [
+    "list-channels.mjs",
+    "manage-channels.mjs",
+    "fetch-all.mjs",
+    "sync-feishu.mjs"
+  ]
+}

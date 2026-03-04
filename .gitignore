@@ -1,0 +1,35 @@
+# 忽略敏感文件和配置
+.env
+.env.*
+*.env
+config.json
+config.*.json
+*.local.*
+*.private.*
+
+# 日志和临时文件
+*.log
+tmp/
+temp/
+output/
+
+# 系统文件
+.DS_Store
+Thumbs.db
+
+# 备份文件
+*.bak
+*.backup
+backups/
+
+# Git
+.git/
+
+# Node modules (如果有)
+node_modules/
+
+# Python 虚拟环境
+venv/
+.env/
+__pycache__/
+*.pyc

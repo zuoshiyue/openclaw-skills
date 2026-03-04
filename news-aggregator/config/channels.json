@@ -1,0 +1,102 @@
+{
+  "channels": [
+    {
+      "id": "weibo",
+      "name": "微博",
+      "url": "https://weibo.com/hot",
+      "type": "社会热点",
+      "priority": "high",
+      "enabled": true,
+      "fetchLimit": 10,
+      "rateLimit": 1000
+    },
+    {
+      "id": "douyin",
+      "name": "抖音",
+      "url": "https://www.douyin.com/hot",
+      "type": "社会热点",
+      "priority": "high",
+      "enabled": true,
+      "fetchLimit": 10,
+      "rateLimit": 1000
+    },
+    {
+      "id": "bilibili",
+      "name": "B 站",
+      "url": "https://www.bilibili.com/v/popular/rank/all",
+      "type": "娱乐",
+      "priority": "medium",
+      "enabled": true,
+      "fetchLimit": 10,
+      "rateLimit": 1000
+    },
+    {
+      "id": "wechat",
+      "name": "微信",
+      "url": "https://tophub.today/n/WnBe01o371",
+      "type": "社会热点",
+      "priority": "high",
+      "enabled": true,
+      "fetchLimit": 10,
+      "rateLimit": 1000
+    },
+    {
+      "id": "zhihu",
+      "name": "知乎",
+      "url": "https://www.zhihu.com/hot",
+      "type": "社会热点",
+      "priority": "high",
+      "enabled": true,
+      "fetchLimit": 10,
+      "rateLimit": 1000
+    },
+    {
+      "id": "xiaohongshu",
+      "name": "小红书",
+      "url": "https://www.xiaohongshu.com/hot",
+      "type": "其他",
+      "priority": "low",
+      "enabled": true,
+      "fetchLimit": 10,
+      "rateLimit": 1000
+    },
+    {
+      "id": "github",
+      "name": "GitHub",
+      "url": "https://github.com/trending",
+      "type": "GitHub 项目",
+      "priority": "high",
+      "enabled": true,
+      "fetchLimit": 10,
+      "rateLimit": 2000
+    },
+    {
+      "id": "ainews",
+      "name": "AI 新闻",
+      "url": "https://news.ycombinator.com/",
+      "type": "AI 动态",
+      "priority": "high",
+      "enabled": true,
+      "fetchLimit": 10,
+      "rateLimit": 2000
+    }
+  ],
+  "output": {
+    "feishu": {
+      "appToken": "TbOOb62kBarSJdsFjouca8Ubnae",
+      "tableId": "tbl2tkIacs8sAVg3",
+      "enabled": true
+    },
+    "push": {
+      "enabled": true,
+      "channel": "feishu",
+      "target": "user:ou_81ff6a748bdc9a5b1d69c253fcbaea90"
+    }
+  },
+  "filters": {
+    "dedup": true,
+    "minScore": 50,
+    "keywords": [],
+    "blocklist": []
+  }
+}
