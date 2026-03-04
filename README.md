@@ -14,6 +14,7 @@
 | `summarize` | URL/文件/YouTube 视频总结 |
 | `find-skills` | 技能发现和安装工具 |
 | `obsidian-cli` | Obsidian 文档编写 CLI |
+| `openclaw-xhs` | 小红书内容搜索/抓取/热点跟踪 |
 
 ### 开发工具
 
@@ -37,6 +38,7 @@
 | `openclaw-cost-guard` | Token 成本追踪和预算控制 |
 | `weather` | 天气查询工具 |
 | `feishu-doc-permissions` | 飞书文档权限管理 |
+| `openclaw-self-healing` | 4 层自愈系统 (Watchdog → Claude Recovery) |
 
 ### 理财
 
@@ -106,9 +108,12 @@ openclaw gateway restart
 
 ## 📝 更新日志
 
-### 2026-03-05
-- ✨ 初始版本发布
-- ✅ 13 个技能已脱敏
+### 2026-03-05 - 新增推荐技能
+- ✅ `openclaw-xhs` - 小红书工具 (1.4K 安装)
+- ✅ `openclaw-self-healing` - 自修复系统 (267 安装)
+
+### 2026-03-05 - 初始版本
+- ✨ 13 个自创技能已脱敏
 - 📚 完整文档和配置说明
 
 ---
