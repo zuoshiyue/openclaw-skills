@@ -1,0 +1,296 @@
+{
+  "name": "阿里巴巴 Java 开发规范",
+  "version": "2022.2.3",
+  "description": "基于阿里巴巴 P3C 项目的 Java 编码规范（黄山版）",
+  "source": "https://github.com/alibaba/p3c",
+  "rules": [
+    {
+      "id": "ALI-P3C-001",
+      "category": "命名风格",
+      "severity": "error",
+      "name": "代码中的命名均不能以下划线或美元符号开始和结束",
+      "description": "下划线和美元符号通常用于内部实现，不应该在公开 API 中使用",
+      "ruleType": "naming"
+    },
+    {
+      "id": "ALI-P3C-002",
+      "category": "命名风格",
+      "severity": "error",
+      "name": "代码中的命名严禁使用拼音与英文混合的方式",
+      "description": "命名应该使用纯英文，避免拼音混合",
+      "ruleType": "naming"
+    },
+    {
+      "id": "ALI-P3C-003",
+      "category": "命名风格",
+      "severity": "error",
+      "name": "类名使用 UpperCamelCase 风格",
+      "description": "类名应该使用大驼峰命名，如 User、UserService",
+      "ruleType": "naming"
+    },
+    {
+      "id": "ALI-P3C-004",
+      "category": "命名风格",
+      "severity": "error",
+      "name": "方法名、参数名、成员变量、局部变量都统一使用 lowerCamelCase 风格",
+      "description": "方法名和变量名应该使用小驼峰命名，如 getUser、userName",
+      "ruleType": "naming"
+    },
+    {
+      "id": "ALI-P3C-005",
+      "category": "命名风格",
+      "severity": "error",
+      "name": "常量命名全部大写，单词间用下划线隔开",
+      "description": "常量应该使用全大写 + 下划线，如 MAX_COUNT、DEFAULT_TIMEOUT",
+      "ruleType": "naming"
+    },
+    {
+      "id": "ALI-P3C-006",
+      "category": "命名风格",
+      "severity": "warning",
+      "name": "抽象类命名使用 Abstract 或 Base 开头",
+      "description": "抽象类应该有明确的前缀标识",
+      "ruleType": "naming"
+    },
+    {
+      "id": "ALI-P3C-007",
+      "category": "命名风格",
+      "severity": "warning",
+      "name": "异常类命名以 Exception 结尾",
+      "description": "自定义异常类应该清晰标识",
+      "ruleType": "naming"
+    },
+    {
+      "id": "ALI-P3C-008",
+      "category": "命名风格",
+      "severity": "warning",
+      "name": "包名统一使用小写，点分隔符之间有且仅有一个自然语义的英语单词",
+      "description": "包名应该简洁清晰，如 com.alibaba.user.service",
+      "ruleType": "naming"
+    },
+    {
+      "id": "ALI-P3C-009",
+      "category": "常量定义",
+      "severity": "error",
+      "name": "不允许任何魔法值（即未经定义的常量）直接出现在代码中",
+      "description": "硬编码的数字、字符串都应该定义为常量",
+      "badExample": "if (status == 3) {}",
+      "goodExample": "if (status == STATUS_APPROVED) {}",
+      "ruleType": "magic-number"
+    },
+    {
+      "id": "ALI-P3C-010",
+      "category": "常量定义",
+      "severity": "error",
+      "name": "long 或者 Long 初始赋值时，必须使用大写的 L",
+      "description": "避免小写 l 与数字 1 混淆",
+      "badExample": "long id = 123l;",
+      "goodExample": "long id = 123L;",
+      "ruleType": "coding"
+    },
+    {
+      "id": "ALI-P3C-011",
+      "category": "格式规约",
+      "severity": "error",
+      "name": "大括号的使用约定",
+      "description": "左大括号前不换行，右大括号前换行",
+      "ruleType": "formatting"
+    },
+    {
+      "id": "ALI-P3C-012",
+      "category": "格式规约",
+      "severity": "error",
+      "name": "采用 4 个空格缩进，禁止使用 tab 字符",
+      "description": "统一使用空格缩进保证代码格式一致",
+      "ruleType": "formatting"
+    },
+    {
+      "id": "ALI-P3C-013",
+      "category": "格式规约",
+      "severity": "warning",
+      "name": "单行字符数限制不超过 120 个",
+      "description": "过长的行应该拆分",
+      "ruleType": "formatting"
+    },
+    {
+      "id": "ALI-P3C-014",
+      "category": "OOP 规约",
+      "severity": "error",
+      "name": "所有的覆写方法，必须加@Override 注解",
+      "description": "确保正确覆写，避免拼写错误",
+      "ruleType": "annotation"
+    },
+    {
+      "id": "ALI-P3C-015",
+      "category": "OOP 规约",
+      "severity": "error",
+      "name": "外部正在调用或者二方库依赖的接口，不允许修改方法签名",
+      "description": "修改接口应该向下兼容，使用@Deprecated 标注旧方法",
+      "ruleType": "compatibility"
+    },
+    {
+      "id": "ALI-P3C-016",
+      "category": "OOP 规约",
+      "severity": "warning",
+      "name": "所有的抽象方法（包括接口中的方法）必须要加 Javadoc 注释",
+      "description": "说明方法的作用、参数、返回值",
+      "ruleType": "comment"
+    },
+    {
+      "id": "ALI-P3C-017",
+      "category": "集合处理",
+      "severity": "error",
+      "name": "关于 hashCode 和 equals 的处理",
+      "description": "覆写 equals 必须同时覆写 hashCode",
+      "ruleType": "equals-hashcode"
+    },
+    {
+      "id": "ALI-P3C-018",
+      "category": "集合处理",
+      "severity": "error",
+      "name": "集合初始化时，指定集合初始值大小",
+      "description": "避免频繁扩容影响性能",
+      "badExample": "new HashMap<>();",
+      "goodExample": "new HashMap<>(16);",
+      "ruleType": "performance"
+    },
+    {
+      "id": "ALI-P3C-019",
+      "category": "集合处理",
+      "severity": "error",
+      "name": "使用 entrySet 遍历 Map 类集合 KV，而不是 keySet 方式",
+      "description": "避免重复 get 操作",
+      "ruleType": "performance"
+    },
+    {
+      "id": "ALI-P3C-020",
+      "category": "并发处理",
+      "severity": "error",
+      "name": "获取单例对象需要严格保证线程安全",
+      "description": "推荐使用枚举或静态内部类方式",
+      "ruleType": "concurrency"
+    },
+    {
+      "id": "ALI-P3C-021",
+      "category": "并发处理",
+      "severity": "error",
+      "name": "SimpleDateFormat 是线程不安全的类",
+      "description": "禁止定义为 static 变量，每次使用时 new 实例",
+      "ruleType": "concurrency"
+    },
+    {
+      "id": "ALI-P3C-022",
+      "category": "并发处理",
+      "severity": "error",
+      "name": "必须回收自定义的 ThreadLocal 变量",
+      "description": "使用完毕后调用 remove() 方法",
+      "ruleType": "concurrency"
+    },
+    {
+      "id": "ALI-P3C-023",
+      "category": "控制语句",
+      "severity": "error",
+      "name": "在一个 switch 块内，每个 case 要么通过 break/return 等来终止，要么注释说明程序将继续执行到哪一个 case 为止",
+      "description": "避免 switch 穿透错误",
+      "ruleType": "control-flow"
+    },
+    {
+      "id": "ALI-P3C-024",
+      "category": "控制语句",
+      "severity": "error",
+      "name": "在 if/else/for/while/do 语句中必须使用大括号",
+      "description": "即使只有一行代码也应该使用大括号",
+      "badExample": "if (condition) doSomething();",
+      "goodExample": "if (condition) { doSomething(); }",
+      "ruleType": "control-flow"
+    },
+    {
+      "id": "ALI-P3C-025",
+      "category": "控制语句",
+      "severity": "warning",
+      "name": "推荐尽量少用 else",
+      "description": "可以通过 return 提前结束来避免 else",
+      "ruleType": "control-flow"
+    },
+    {
+      "id": "ALI-P3C-026",
+      "category": "注释规约",
+      "severity": "error",
+      "name": "类、类属性、类方法的注释必须使用 Javadoc 规范",
+      "description": "使用/** */格式，包含@author、@param、@return 等",
+      "ruleType": "comment"
+    },
+    {
+      "id": "ALI-P3C-027",
+      "category": "注释规约",
+      "severity": "error",
+      "name": "所有的类都必须添加创建者信息",
+      "description": "使用@author 标注",
+      "ruleType": "comment"
+    },
+    {
+      "id": "ALI-P3C-028",
+      "category": "注释规约",
+      "severity": "warning",
+      "name": "代码修改时，应该同步修改注释",
+      "description": "保持注释与代码一致",
+      "ruleType": "comment"
+    },
+    {
+      "id": "ALI-P3C-029",
+      "category": "注释规约",
+      "severity": "error",
+      "name": "特殊标记标记 TODO/FIXME 等",
+      "description": "待办事项应该明确标记",
+      "ruleType": "comment"
+    },
+    {
+      "id": "ALI-P3C-030",
+      "category": "其他",
+      "severity": "error",
+      "name": "注意 Math.random() 这个方法返回是 double 类型",
+      "description": "注意取值范围是 [0,1)",
+      "ruleType": "coding"
+    },
+    {
+      "id": "ALI-P3C-031",
+      "category": "其他",
+      "severity": "error",
+      "name": "表示时间间隔时，优先使用 java.time 包",
+      "description": "Java 8+ 推荐使用新的时间 API",
+      "ruleType": "coding"
+    },
+    {
+      "id": "ALI-P3C-032",
+      "category": "其他",
+      "severity": "warning",
+      "name": "慎用 Object 的 clone 方法来拷贝对象",
+      "description": "浅拷贝可能导致问题，推荐使用构造器或工厂方法",
+      "ruleType": "coding"
+    },
+    {
+      "id": "ALI-P3C-033",
+      "category": "其他",
+      "severity": "error",
+      "name": "类成员和方法访问权限从严控制",
+      "description": "优先使用 private，必要时再放宽",
+      "ruleType": "encapsulation"
+    },
+    {
+      "id": "ALI-P3C-034",
+      "category": "其他",
+      "severity": "error",
+      "name": "禁止在子循环中调用外层循环方法",
+      "description": "避免性能问题",
+      "ruleType": "performance"
+    },
+    {
+      "id": "ALI-P3C-035",
+      "category": "其他",
+      "severity": "error",
+      "name": "防止 NPE，是程序员的基本修养",
+      "description": "使用 Optional、Objects.requireNonNull 等工具",
+      "ruleType": "null-safety"
+    }
+  ]
+}

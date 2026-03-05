@@ -1,0 +1,54 @@
+{
+  "name": "我的团队代码规范",
+  "version": "1.0.0",
+  "description": "基于 Code Standards 定制的团队规范",
+  "extends": ["clean-code", "solid", "alibaba-java"],
+  
+  "rules": {
+    "custom": [
+      {
+        "id": "TEAM-001",
+        "severity": "error",
+        "name": "禁止使用 System.out.println",
+        "description": "生产代码必须使用日志框架",
+        "pattern": "System\\.out\\.(println|print)",
+        "suggestion": "使用 logger.info() 或 logger.debug()"
+      },
+      {
+        "id": "TEAM-002",
+        "severity": "warning",
+        "name": "方法必须有返回类型声明",
+        "description": "TypeScript/Java 等语言必须显式声明返回类型",
+        "suggestion": "添加返回类型声明，如 : string 或 List<String>"
+      }
+    ],
+    
+    "overrides": {
+      "CC-FUNC-001": {
+        "severity": "warning",
+        "threshold": 5
+      },
+      "SMELL-004": {
+        "severity": "warning",
+        "threshold": 5
+      }
+    },
+    
+    "disabled": [
+      "ALI-P3C-012"
+    ]
+  },
+  
+  "ignorePatterns": [
+    "**/test/**",
+    "**/*.test.js",
+    "**/generated/**",
+    "**/vendor/**"
+  ],
+  
+  "reportFormat": {
+    "output": "console",
+    "verbose": true,
+    "showSuggestions": true
+  }
+}

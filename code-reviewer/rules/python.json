@@ -1,0 +1,280 @@
+{
+  "name": "Python Code Standards",
+  "version": "1.0.0",
+  "description": "Python 代码规范检查规则",
+  "source": "PEP 8, Clean Code Python, Effective Python",
+  "rules": [
+    {
+      "id": "PY-PEP8-001",
+      "category": "命名风格",
+      "severity": "error",
+      "name": "函数名使用小写 + 下划线",
+      "description": "Python 函数名应该使用 snake_case 风格",
+      "pattern": "def [a-z]+[A-Z]",
+      "suggestion": "使用 get_user_data 而非 getUserData"
+    },
+    {
+      "id": "PY-PEP8-002",
+      "category": "命名风格",
+      "severity": "error",
+      "name": "类名使用大驼峰",
+      "description": "Python 类名应该使用 PascalCase 风格",
+      "pattern": "class [a-z]",
+      "suggestion": "使用 UserService 而非 userService 或 user_service"
+    },
+    {
+      "id": "PY-PEP8-003",
+      "category": "命名风格",
+      "severity": "error",
+      "name": "常量使用全大写 + 下划线",
+      "description": "模块级常量应该使用 UPPER_CASE",
+      "pattern": "^[A-Z][A-Z0-9_]*\\s*=",
+      "suggestion": "使用 MAX_COUNT = 100"
+    },
+    {
+      "id": "PY-PEP8-004",
+      "category": "命名风格",
+      "severity": "warning",
+      "name": "私有方法使用单下划线前缀",
+      "description": "内部方法应该使用 _method_name",
+      "suggestion": "使用 _internal_method 表示私有方法"
+    },
+    {
+      "id": "PY-PEP8-005",
+      "category": "命名风格",
+      "severity": "error",
+      "name": "避免使用 l, O, I 作为单字符变量",
+      "description": "这些字符容易与数字混淆",
+      "suggestion": "使用 letter, obj, index 替代"
+    },
+    {
+      "id": "PY-FORMAT-001",
+      "category": "格式规范",
+      "severity": "error",
+      "name": "使用 4 个空格缩进",
+      "description": "禁止使用 tab，统一使用 4 个空格",
+      "suggestion": "配置编辑器使用空格替代 tab"
+    },
+    {
+      "id": "PY-FORMAT-002",
+      "category": "格式规范",
+      "severity": "warning",
+      "name": "单行不超过 120 字符",
+      "description": "PEP 8 建议 79 字符，现代标准 120 字符",
+      "threshold": 120,
+      "suggestion": "拆分长行或使用括号换行"
+    },
+    {
+      "id": "PY-FORMAT-003",
+      "category": "格式规范",
+      "severity": "warning",
+      "name": "导入语句分组",
+      "description": "导入应该分组：标准库、三方库、本地模块",
+      "suggestion": "使用 isort 自动排序导入"
+    },
+    {
+      "id": "PY-FORMAT-004",
+      "category": "格式规范",
+      "severity": "error",
+      "name": "顶级定义之间空两行",
+      "description": "类、函数定义之间应该有两个空行",
+      "suggestion": "在 def 和 class 之间添加空行"
+    },
+    {
+      "id": "PY-CLEAN-001",
+      "category": "Clean Code",
+      "severity": "error",
+      "name": "函数不超过 50 行",
+      "description": "长函数应该拆分",
+      "threshold": 50,
+      "suggestion": "提取子函数，遵循单一职责"
+    },
+    {
+      "id": "PY-CLEAN-002",
+      "category": "Clean Code",
+      "severity": "warning",
+      "name": "函数参数不超过 5 个",
+      "description": "参数过多应该使用数据类或字典",
+      "threshold": 5,
+      "suggestion": "使用 dataclass 或命名参数"
+    },
+    {
+      "id": "PY-CLEAN-003",
+      "category": "Clean Code",
+      "severity": "error",
+      "name": "避免魔法数字",
+      "description": "硬编码数字应该定义为常量",
+      "suggestion": "定义 MAX_RETRY = 3 而非直接使用 3"
+    },
+    {
+      "id": "PY-CLEAN-004",
+      "category": "Clean Code",
+      "severity": "warning",
+      "name": "使用类型提示",
+      "description": "Python 3.5+ 应该使用 type hints",
+      "suggestion": "def greet(name: str) -> str:"
+    },
+    {
+      "id": "PY-CLEAN-005",
+      "category": "Clean Code",
+      "severity": "error",
+      "name": "避免裸露的 except",
+      "description": "except: 会捕获所有异常包括 KeyboardInterrupt",
+      "badExample": "try: ... except: ...",
+      "goodExample": "try: ... except SpecificError: ...",
+      "suggestion": "捕获具体异常类型"
+    },
+    {
+      "id": "PY-CLEAN-006",
+      "category": "Clean Code",
+      "severity": "warning",
+      "name": "使用上下文管理器",
+      "description": "文件、网络连接等资源应该使用 with 语句",
+      "badExample": "f = open('file.txt'); ...; f.close()",
+      "goodExample": "with open('file.txt') as f: ...",
+      "suggestion": "使用 with 语句自动管理资源"
+    },
+    {
+      "id": "PY-CLEAN-007",
+      "category": "Clean Code",
+      "severity": "warning",
+      "name": "优先使用列表推导式",
+      "description": "简单的循环可以用列表推导式替代",
+      "badExample": "result = []; for x in items: result.append(x * 2)",
+      "goodExample": "result = [x * 2 for x in items]",
+      "suggestion": "使用列表推导式使代码更简洁"
+    },
+    {
+      "id": "PY-CLEAN-008",
+      "category": "Clean Code",
+      "severity": "error",
+      "name": "不要使用可变默认参数",
+      "description": "可变默认参数会导致意外行为",
+      "badExample": "def append(item, list=[]): list.append(item)",
+      "goodExample": "def append(item, list=None): list = list or []",
+      "suggestion": "使用 None 作为默认值"
+    },
+    {
+      "id": "PY-SOLID-001",
+      "category": "SOLID",
+      "severity": "warning",
+      "name": "单一职责原则",
+      "description": "类应该只有一个改变的理由",
+      "suggestion": "拆分承担多个职责的类"
+    },
+    {
+      "id": "PY-SOLID-002",
+      "category": "SOLID",
+      "severity": "info",
+      "name": "优先使用组合而非继承",
+      "description": "过深的继承层次应该用组合替代",
+      "suggestion": "使用委托模式替代多层继承"
+    },
+    {
+      "id": "PY-PYTHONIC-001",
+      "category": "Pythonic",
+      "severity": "warning",
+      "name": "使用 EAFP 而非 LBYL",
+      "description": "Python 风格：先尝试后处理异常",
+      "badExample": "if key in dict: value = dict[key]",
+      "goodExample": "try: value = dict[key] except KeyError: ...",
+      "suggestion": "使用 try/except 而非预先检查"
+    },
+    {
+      "id": "PY-PYTHONIC-002",
+      "category": "Pythonic",
+      "severity": "warning",
+      "name": "使用 enumerate 而非 range(len())",
+      "description": "Pythonic 的遍历方式",
+      "badExample": "for i in range(len(items)): ...",
+      "goodExample": "for i, item in enumerate(items): ...",
+      "suggestion": "使用 enumerate 获取索引和值"
+    },
+    {
+      "id": "PY-PYTHONIC-003",
+      "category": "Pythonic",
+      "severity": "warning",
+      "name": "使用 zip 遍历多个序列",
+      "description": "Pythonic 的并行遍历",
+      "badExample": "for i in range(len(a)): print(a[i], b[i])",
+      "goodExample": "for x, y in zip(a, b): print(x, y)",
+      "suggestion": "使用 zip 函数"
+    },
+    {
+      "id": "PY-PYTHONIC-004",
+      "category": "Pythonic",
+      "severity": "warning",
+      "name": "使用 get 方法访问字典",
+      "description": "安全访问字典键",
+      "badExample": "value = d[key] if key in d else default",
+      "goodExample": "value = d.get(key, default)",
+      "suggestion": "使用 dict.get(key, default)"
+    },
+    {
+      "id": "PY-SECURITY-001",
+      "category": "安全",
+      "severity": "error",
+      "name": "禁止使用 eval/exec",
+      "description": "eval 和 exec 有严重安全风险",
+      "pattern": "\\b(eval|exec)\\s*\\(",
+      "suggestion": "使用 ast.literal_eval 或替代方案"
+    },
+    {
+      "id": "PY-SECURITY-002",
+      "category": "安全",
+      "severity": "error",
+      "name": "SQL 使用参数化查询",
+      "description": "防止 SQL 注入",
+      "pattern": "execute\\s*\\(.*%.*\\)",
+      "suggestion": "使用 cursor.execute(sql, params)"
+    },
+    {
+      "id": "PY-PERF-001",
+      "category": "性能",
+      "severity": "warning",
+      "name": "避免在循环中重复计算",
+      "description": "循环不变量应该提取到循环外",
+      "suggestion": "将 len(items) 等计算提取到循环外"
+    },
+    {
+      "id": "PY-PERF-002",
+      "category": "性能",
+      "severity": "info",
+      "name": "使用生成器处理大数据",
+      "description": "大数据集应该使用生成器节省内存",
+      "suggestion": "使用 (x for x in data) 而非 [x for x in data]"
+    },
+    {
+      "id": "PY-TEST-001",
+      "category": "测试",
+      "severity": "warning",
+      "name": "公共函数应该有测试",
+      "description": "没有测试的代码无法保证质量",
+      "suggestion": "为公共函数编写单元测试"
+    },
+    {
+      "id": "PY-TEST-002",
+      "category": "测试",
+      "severity": "info",
+      "name": "使用 pytest 风格",
+      "description": "推荐使用 pytest 而非 unittest",
+      "suggestion": "使用 pytest 的简洁语法"
+    },
+    {
+      "id": "PY-DOC-001",
+      "category": "文档",
+      "severity": "warning",
+      "name": "公共函数有 docstring",
+      "description": "公共函数应该有文档字符串",
+      "suggestion": "添加三引号文档字符串"
+    },
+    {
+      "id": "PY-DOC-002",
+      "category": "文档",
+      "severity": "info",
+      "name": "docstring 使用三双引号",
+      "description": "PEP 257 规范",
+      "suggestion": "使用三双引号而非三单引号"
+    }
+  ]
+}

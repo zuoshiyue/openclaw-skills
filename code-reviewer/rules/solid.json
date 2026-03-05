@@ -1,0 +1,165 @@
+{
+  "name": "SOLID Principles",
+  "version": "1.0.0",
+  "description": "SOLID 面向对象设计原则检查规则",
+  "source": "Robert C. Martin - Clean Code / Agile Software Development",
+  "principles": [
+    {
+      "id": "SOLID-SRP",
+      "name": "Single Responsibility Principle (单一职责原则)",
+      "description": "一个类应该只有一个引起变化的原因",
+      "rules": [
+        {
+          "id": "SRP-001",
+          "severity": "warning",
+          "name": "类职责过多",
+          "description": "类包含过多不相关的方法",
+          "checkPattern": "public.*(?:save|load|validate|send|print|log|report)",
+          "suggestion": "拆分为多个类，每个类负责单一职责"
+        },
+        {
+          "id": "SRP-002",
+          "severity": "warning",
+          "name": "函数做多件事",
+          "description": "函数名包含 and/or 等连接词",
+          "checkPattern": "(?:validateAndSave|loadAndProcess|getOrCreate)",
+          "suggestion": "拆分为多个独立函数"
+        }
+      ]
+    },
+    {
+      "id": "SOLID-OCP",
+      "name": "Open/Closed Principle (开闭原则)",
+      "description": "软件实体应该对扩展开放，对修改关闭",
+      "rules": [
+        {
+          "id": "OCP-001",
+          "severity": "warning",
+          "name": "过多条件判断",
+          "description": "函数包含大量 if/else 或 switch 处理不同类型",
+          "checkPattern": "(?:if.*type|switch.*type|case\\s+\\w+)",
+          "suggestion": "使用策略模式或多态替代条件判断"
+        },
+        {
+          "id": "OCP-002",
+          "severity": "info",
+          "name": "缺少抽象",
+          "description": "直接使用具体类而非接口",
+          "suggestion": "依赖抽象接口，便于扩展"
+        }
+      ]
+    },
+    {
+      "id": "SOLID-LSP",
+      "name": "Liskov Substitution Principle (里氏替换原则)",
+      "description": "子类应该能够替换父类而不影响程序正确性",
+      "rules": [
+        {
+          "id": "LSP-001",
+          "severity": "error",
+          "name": "子类抛出父类未声明的异常",
+          "description": "子类方法抛出父类方法未声明的异常",
+          "suggestion": "统一异常处理，或重新设计继承关系"
+        },
+        {
+          "id": "LSP-002",
+          "severity": "error",
+          "name": "子类违反前置条件",
+          "description": "子类方法要求比父类更严格的输入条件",
+          "suggestion": "放松子类的前置条件"
+        },
+        {
+          "id": "LSP-003",
+          "severity": "warning",
+          "name": "UnsupportedOperationException",
+          "description": "子类方法抛出 UnsupportedOperationException",
+          "suggestion": "重新设计继承层次，使用组合替代"
+        }
+      ]
+    },
+    {
+      "id": "SOLID-ISP",
+      "name": "Interface Segregation Principle (接口隔离原则)",
+      "description": "客户端不应该依赖它不需要的接口",
+      "rules": [
+        {
+          "id": "ISP-001",
+          "severity": "warning",
+          "name": "臃肿接口",
+          "description": "接口包含超过 5 个方法",
+          "threshold": 5,
+          "suggestion": "拆分为更小的专用接口"
+        },
+        {
+          "id": "ISP-002",
+          "severity": "warning",
+          "name": "空实现",
+          "description": "类实现了接口但某些方法为空实现",
+          "checkPattern": "@Override\\s*(?:public)?\\s*\\w+\\s*\\(\\)\\s*\\{\\s*\\}",
+          "suggestion": "拆分接口，只实现需要的方法"
+        }
+      ]
+    },
+    {
+      "id": "SOLID-DIP",
+      "name": "Dependency Inversion Principle (依赖倒置原则)",
+      "description": "高层模块不应该依赖低层模块，两者都应该依赖抽象",
+      "rules": [
+        {
+          "id": "DIP-001",
+          "severity": "warning",
+          "name": "直接实例化依赖",
+          "description": "类内部直接 new 具体依赖对象",
+          "checkPattern": "new\\s+\\w+(?:Service|Repository|Manager|Helper)",
+          "suggestion": "使用依赖注入，依赖抽象接口"
+        },
+        {
+          "id": "DIP-002",
+          "severity": "warning",
+          "name": "依赖具体类",
+          "description": "方法参数或字段是具体类而非接口",
+          "suggestion": "使用接口或抽象类作为类型"
+        },
+        {
+          "id": "DIP-003",
+          "severity": "info",
+          "name": "静态方法依赖",
+          "description": "过度使用静态工具方法",
+          "suggestion": "考虑将静态方法改为可注入的服务"
+        }
+      ]
+    }
+  ],
+  "refactoring Techniques": [
+    {
+      "name": "Extract Method (提取函数)",
+      "when": "函数过长或过于复杂",
+      "how": "将代码块提取为独立函数，以函数名表达意图"
+    },
+    {
+      "name": "Extract Class (提取类)",
+      "when": "类承担过多职责",
+      "how": "将相关字段和方法提取到新类"
+    },
+    {
+      "name": "Introduce Parameter Object (引入参数对象)",
+      "when": "参数过多",
+      "how": "将相关参数封装为对象"
+    },
+    {
+      "name": "Replace Conditional with Polymorphism (以多态取代条件)",
+      "when": "复杂的条件判断",
+      "how": "创建策略类，每个策略处理一种情况"
+    },
+    {
+      "name": "Introduce Null Object (引入空对象)",
+      "when": "频繁的空值检查",
+      "how": "创建空对象实现默认行为"
+    },
+    {
+      "name": "Replace Temp with Query (以查询取代临时变量)",
+      "when": "临时变量使函数过长",
+      "how": "将计算逻辑提取为独立函数"
+    }
+  ]
+}

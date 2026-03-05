@@ -1,0 +1,352 @@
+{
+  "name": "Go Code Standards",
+  "version": "1.0.0",
+  "description": "Go 代码规范检查规则",
+  "source": "Effective Go, Go Code Review Comments, Uber Go Style Guide",
+  "rules": [
+    {
+      "id": "GO-FORMAT-001",
+      "category": "格式规范",
+      "severity": "error",
+      "name": "使用 gofmt 格式化",
+      "description": "Go 代码必须使用 gofmt 格式化",
+      "suggestion": "运行 gofmt -w file.go"
+    },
+    {
+      "id": "GO-FORMAT-002",
+      "category": "格式规范",
+      "severity": "error",
+      "name": "使用 goimports 管理导入",
+      "description": "自动添加/移除导入，保持导入排序",
+      "suggestion": "运行 goimports -w file.go"
+    },
+    {
+      "id": "GO-FORMAT-003",
+      "category": "格式规范",
+      "severity": "warning",
+      "name": "单行不超过 120 字符",
+      "description": "保持代码可读性",
+      "threshold": 120,
+      "suggestion": "拆分长行"
+    },
+    {
+      "id": "GO-NAMING-001",
+      "category": "命名风格",
+      "severity": "error",
+      "name": "使用 MixedCaps 命名",
+      "description": "Go 使用驼峰命名，不使用下划线",
+      "pattern": "[a-z]_[a-z]",
+      "suggestion": "使用 userName 而非 user_name"
+    },
+    {
+      "id": "GO-NAMING-002",
+      "category": "命名风格",
+      "severity": "error",
+      "name": "首字母大写决定可见性",
+      "description": "大写字母开头=导出，小写=包内私有",
+      "suggestion": "导出的函数/类型用大写，私有用小写"
+    },
+    {
+      "id": "GO-NAMING-003",
+      "category": "命名风格",
+      "severity": "warning",
+      "name": "避免冗余命名",
+      "description": "包名已经提供上下文时不要重复",
+      "badExample": "pkg.UserService",
+      "goodExample": "pkg.Service",
+      "suggestion": "使用 Service 而非 UserService（在 user 包中）"
+    },
+    {
+      "id": "GO-NAMING-004",
+      "category": "命名风格",
+      "severity": "warning",
+      "name": "接口命名建议",
+      "description": "单方法接口用 -er 后缀",
+      "suggestion": "使用 Reader, Writer, Stringer"
+    },
+    {
+      "id": "GO-NAMING-005",
+      "category": "命名风格",
+      "severity": "error",
+      "name": "避免使用泛化的包名",
+      "description": "包名应该具体有意义",
+      "badExample": "package util, package common",
+      "goodExample": "package stringutil, package config",
+      "suggestion": "使用具体的包名"
+    },
+    {
+      "id": "GO-FUNC-001",
+      "category": "函数设计",
+      "severity": "warning",
+      "name": "函数长度控制",
+      "description": "函数应该短小精悍",
+      "threshold": 50,
+      "suggestion": "拆分长函数"
+    },
+    {
+      "id": "GO-FUNC-002",
+      "category": "函数设计",
+      "severity": "warning",
+      "name": "参数数量控制",
+      "description": "参数过多考虑使用配置结构体",
+      "threshold": 5,
+      "suggestion": "使用 Option 模式或配置结构体"
+    },
+    {
+      "id": "GO-FUNC-003",
+      "category": "函数设计",
+      "severity": "error",
+      "name": "返回值顺序",
+      "description": "Go 惯例：返回值最后是 error",
+      "badExample": "func (error, result)",
+      "goodExample": "func (result, error)",
+      "suggestion": "error 作为最后一个返回值"
+    },
+    {
+      "id": "GO-FUNC-004",
+      "category": "函数设计",
+      "severity": "warning",
+      "name": "命名返回值谨慎使用",
+      "description": "命名返回值可能降低代码清晰度",
+      "suggestion": "简单函数可用，复杂函数避免使用"
+    },
+    {
+      "id": "GO-ERROR-001",
+      "category": "错误处理",
+      "severity": "error",
+      "name": "不要忽略错误",
+      "description": "错误必须处理，不能用 _ 忽略",
+      "pattern": "_,\\s*err\\s*:=.*\\n",
+      "suggestion": "处理错误或明确记录为什么忽略"
+    },
+    {
+      "id": "GO-ERROR-002",
+      "category": "错误处理",
+      "severity": "error",
+      "name": "错误检查应该优先",
+      "description": "先检查错误，再处理正常逻辑",
+      "badExample": "if err == nil { ... } else { return err }",
+      "goodExample": "if err != nil { return err } ...",
+      "suggestion": "使用卫语句提前返回"
+    },
+    {
+      "id": "GO-ERROR-003",
+      "category": "错误处理",
+      "severity": "error",
+      "name": "错误信息格式",
+      "description": "错误信息应该小写开头，不带标点",
+      "badExample": "fmt.Errorf(\"Error: %v\", err)",
+      "goodExample": "fmt.Errorf(\"failed to process: %w\", err)",
+      "suggestion": "错误信息小写，使用%w包装"
+    },
+    {
+      "id": "GO-ERROR-004",
+      "category": "错误处理",
+      "severity": "warning",
+      "name": "不要重复包装错误",
+      "description": "避免多层包装同一错误",
+      "suggestion": "在合适的层次包装一次"
+    },
+    {
+      "id": "GO-ERROR-005",
+      "category": "错误处理",
+      "severity": "error",
+      "name": "panic 使用限制",
+      "description": "只能在不可恢复的错误时使用 panic",
+      "suggestion": "使用 error 返回值而非 panic"
+    },
+    {
+      "id": "GO-CONCURRENCY-001",
+      "category": "并发",
+      "severity": "error",
+      "name": "不要通过共享内存通信",
+      "description": "Go 哲学：通过通信共享内存",
+      "suggestion": "使用 channel 而非共享变量"
+    },
+    {
+      "id": "GO-CONCURRENCY-002",
+      "category": "并发",
+      "severity": "error",
+      "name": "goroutine 泄漏预防",
+      "description": "启动 goroutine 要知道何时结束",
+      "suggestion": "使用 context 或 channel 控制生命周期"
+    },
+    {
+      "id": "GO-CONCURRENCY-003",
+      "category": "并发",
+      "severity": "error",
+      "name": "channel 使用规范",
+      "description": "明确 channel 的所有权和方向",
+      "suggestion": "使用 <-chan 或 chan<- 明确方向"
+    },
+    {
+      "id": "GO-CONCURRENCY-004",
+      "category": "并发",
+      "severity": "warning",
+      "name": "context 使用",
+      "description": "长时间运行的操作应该接受 context",
+      "suggestion": "func DoWork(ctx context.Context) error"
+    },
+    {
+      "id": "GO-CONCURRENCY-005",
+      "category": "并发",
+      "severity": "error",
+      "name": "等待 goroutine 完成",
+      "description": "主程序退出前等待 goroutine",
+      "suggestion": "使用 sync.WaitGroup"
+    },
+    {
+      "id": "GO-POINTER-001",
+      "category": "指针",
+      "severity": "info",
+      "name": "指针使用建议",
+      "description": "小结构体传值，大结构体传指针",
+      "suggestion": "基本类型和小型结构体传值"
+    },
+    {
+      "id": "GO-POINTER-002",
+      "category": "指针",
+      "severity": "warning",
+      "name": "避免返回局部变量指针",
+      "description": "可能导致逃逸分析失败",
+      "suggestion": "返回值而非指针（除非必要）"
+    },
+    {
+      "id": "GO-INTERFACE-001",
+      "category": "接口",
+      "severity": "warning",
+      "name": "接口应该小而专注",
+      "description": "Go 接口通常只有 1-2 个方法",
+      "suggestion": "使用单一方法的接口"
+    },
+    {
+      "id": "GO-INTERFACE-002",
+      "category": "接口",
+      "severity": "warning",
+      "name": "接受接口返回结构体",
+      "description": "函数参数用接口，返回值用具体类型",
+      "badExample": "func New() Interface",
+      "goodExample": "func New() *ConcreteType",
+      "suggestion": "返回具体类型便于使用"
+    },
+    {
+      "id": "GO-DEFER-001",
+      "category": "defer",
+      "severity": "warning",
+      "name": "defer 使用场景",
+      "description": "defer 用于资源清理、解锁等",
+      "suggestion": "defer file.Close(), defer mu.Unlock()"
+    },
+    {
+      "id": "GO-DEFER-002",
+      "category": "defer",
+      "severity": "error",
+      "name": "defer 在循环中谨慎使用",
+      "description": "循环中的 defer 会在函数返回时执行",
+      "badExample": "for ... { defer f.Close() }",
+      "suggestion": "在循环内使用函数包装"
+    },
+    {
+      "id": "GO-MAP-001",
+      "category": "集合",
+      "severity": "warning",
+      "name": "map 并发安全",
+      "description": "map 不是并发安全的",
+      "suggestion": "使用 sync.Map 或加锁保护"
+    },
+    {
+      "id": "GO-MAP-002",
+      "category": "集合",
+      "severity": "warning",
+      "name": "slice 初始化",
+      "description": "已知容量时预分配",
+      "badExample": "var s []int",
+      "goodExample": "s := make([]int, 0, 10)",
+      "suggestion": "使用 make 预分配容量"
+    },
+    {
+      "id": "GO-TEST-001",
+      "category": "测试",
+      "severity": "warning",
+      "name": "测试文件命名",
+      "description": "测试文件应该以_test.go 结尾",
+      "suggestion": "user_test.go"
+    },
+    {
+      "id": "GO-TEST-002",
+      "category": "测试",
+      "severity": "warning",
+      "name": "测试函数命名",
+      "description": "测试函数应该以 Test 开头",
+      "suggestion": "func TestUserService(t *testing.T)"
+    },
+    {
+      "id": "GO-TEST-003",
+      "category": "测试",
+      "severity": "info",
+      "name": "使用表格驱动测试",
+      "description": "Go 推荐的测试模式",
+      "suggestion": "使用 tests := []struct{...} 模式"
+    },
+    {
+      "id": "GO-DOC-001",
+      "category": "文档",
+      "severity": "warning",
+      "name": "导出的标识符必须有注释",
+      "description": "Go 要求导出的函数/类型有文档",
+      "suggestion": "// Function does something"
+    },
+    {
+      "id": "GO-DOC-002",
+      "category": "文档",
+      "severity": "info",
+      "name": "文档注释格式",
+      "description": "文档注释应该以标识符开头",
+      "badExample": "// This function does something",
+      "goodExample": "// Function does something",
+      "suggestion": "注释直接说明功能"
+    },
+    {
+      "id": "GO-PERF-001",
+      "category": "性能",
+      "severity": "info",
+      "name": "字符串拼接",
+      "description": "大量拼接使用 strings.Builder",
+      "badExample": "s += chunk",
+      "goodExample": "var b strings.Builder; b.WriteString(chunk)",
+      "suggestion": "使用 strings.Builder"
+    },
+    {
+      "id": "GO-PERF-002",
+      "category": "性能",
+      "severity": "info",
+      "name": "避免不必要的转换",
+      "description": "减少类型转换开销",
+      "suggestion": "缓存转换结果"
+    },
+    {
+      "id": "GO-SIMPLICITY-001",
+      "category": "简洁",
+      "severity": "warning",
+      "name": "保持代码简单",
+      "description": "Go 哲学：简单优于复杂",
+      "suggestion": "选择简单的解决方案"
+    },
+    {
+      "id": "GO-SIMPLICITY-002",
+      "category": "简洁",
+      "severity": "warning",
+      "name": "避免过度抽象",
+      "description": "不要过早优化或抽象",
+      "suggestion": "YAGNI 原则"
+    },
+    {
+      "id": "GO-SIMPLICITY-003",
+      "category": "简洁",
+      "severity": "warning",
+      "name": "依赖最小化",
+      "description": "减少外部依赖",
+      "suggestion": "优先使用标准库"
+    }
+  ]
+}

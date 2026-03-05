@@ -1,0 +1,229 @@
+{
+  "name": "Code Smells Detection Rules",
+  "version": "1.0.0",
+  "description": "代码异味检测规则 - 基于 Martin Fowler 重构书籍",
+  "source": "Refactoring: Improving the Design of Existing Code",
+  "rules": [
+    {
+      "id": "SMELL-001",
+      "category": "Bloaters",
+      "severity": "warning",
+      "name": "Long Method (过长函数)",
+      "description": "函数过长，难以理解，应该拆分",
+      "threshold": 50,
+      "suggestion": "提取函数，遵循单一职责原则",
+      "checkType": "function-length"
+    },
+    {
+      "id": "SMELL-002",
+      "category": "Bloaters",
+      "severity": "warning",
+      "name": "Large Class (过大类)",
+      "description": "类包含过多方法和字段，职责不单一",
+      "threshold": 500,
+      "suggestion": "拆分类，提取接口或抽象基类",
+      "checkType": "class-size"
+    },
+    {
+      "id": "SMELL-003",
+      "category": "Bloaters",
+      "severity": "warning",
+      "name": "Long Parameter List (过长参数列表)",
+      "description": "函数参数超过 3 个，应该封装为对象",
+      "threshold": 3,
+      "suggestion": "使用参数对象或 Builder 模式",
+      "checkType": "parameter-count"
+    },
+    {
+      "id": "SMELL-004",
+      "category": "Bloaters",
+      "severity": "error",
+      "name": "Deep Nesting (过深嵌套)",
+      "description": "代码嵌套超过 4 层，难以阅读",
+      "threshold": 4,
+      "suggestion": "使用提前返回、卫语句、提取函数",
+      "checkType": "nesting-depth"
+    },
+    {
+      "id": "SMELL-005",
+      "category": "Object-Orientation Abusers",
+      "severity": "error",
+      "name": "Switch Statements (switch 语句)",
+      "description": "过多的 switch 语句，应该使用多态",
+      "suggestion": "使用策略模式或多态替代",
+      "checkType": "switch-statement"
+    },
+    {
+      "id": "SMELL-006",
+      "category": "Object-Orientation Abusers",
+      "severity": "warning",
+      "name": "Temporary Field (临时字段)",
+      "description": "类的某个字段只在某些情况下被使用",
+      "suggestion": "提取类，将相关字段分组",
+      "checkType": "field-usage"
+    },
+    {
+      "id": "SMELL-007",
+      "category": "Change Preventers",
+      "severity": "error",
+      "name": "Divergent Change (发散式变化)",
+      "description": "一个类因为不同原因在不同方向上变化",
+      "suggestion": "拆分类，每个类只负责一个变化方向",
+      "checkType": "change-coupling"
+    },
+    {
+      "id": "SMELL-008",
+      "category": "Change Preventers",
+      "severity": "error",
+      "name": "Shotgun Surgery (霰弹式修改)",
+      "description": "一个变化需要修改许多类",
+      "suggestion": "合并相关类，减少耦合",
+      "checkType": "change-scattering"
+    },
+    {
+      "id": "SMELL-009",
+      "category": "Dispensables",
+      "severity": "error",
+      "name": "Duplicate Code (重复代码)",
+      "description": "相同的代码在多处出现",
+      "threshold": 5,
+      "suggestion": "提取公共函数或模板方法",
+      "checkType": "duplication"
+    },
+    {
+      "id": "SMELL-010",
+      "category": "Dispensables",
+      "severity": "warning",
+      "name": "Dead Code (死代码)",
+      "description": "永远不会被执行的代码",
+      "suggestion": "删除无用代码",
+      "checkType": "dead-code"
+    },
+    {
+      "id": "SMELL-011",
+      "category": "Dispensables",
+      "severity": "warning",
+      "name": "Speculative Generality (过度设计)",
+      "description": "创建了当前不需要的抽象",
+      "suggestion": "遵循 YAGNI 原则，移除不必要的抽象",
+      "checkType": "over-engineering"
+    },
+    {
+      "id": "SMELL-012",
+      "category": "Dispensables",
+      "severity": "info",
+      "name": "Commented Out Code (注释代码)",
+      "description": "被注释掉的代码，应该删除",
+      "suggestion": "版本控制保留历史，删除注释代码",
+      "checkType": "commented-code"
+    },
+    {
+      "id": "SMELL-013",
+      "category": "Couplers",
+      "severity": "error",
+      "name": "Feature Envy (依恋情节)",
+      "description": "函数过度使用其他类的数据",
+      "suggestion": "将函数移动到它更关心的类中",
+      "checkType": "feature-envy"
+    },
+    {
+      "id": "SMELL-014",
+      "category": "Couplers",
+      "severity": "warning",
+      "name": "Inappropriate Intimacy (不恰当亲密)",
+      "description": "类之间过度耦合，了解彼此内部细节",
+      "suggestion": "减少耦合，使用接口通信",
+      "checkType": "coupling"
+    },
+    {
+      "id": "SMELL-015",
+      "category": "Couplers",
+      "severity": "warning",
+      "name": "Data Class (数据类)",
+      "description": "只有字段和 getter/setter，没有行为",
+      "suggestion": "将相关操作移到数据类中",
+      "checkType": "data-class"
+    },
+    {
+      "id": "SMELL-016",
+      "category": "Couplers",
+      "severity": "warning",
+      "name": "Message Chains (消息链)",
+      "description": "过长的方法调用链 a.getB().getC().doSomething()",
+      "suggestion": "使用委托模式，减少链式调用",
+      "checkType": "message-chain"
+    },
+    {
+      "id": "SMELL-017",
+      "category": "Couplers",
+      "severity": "warning",
+      "name": "Middle Man (中间人)",
+      "description": "类只委托给其他类，没有自己的职责",
+      "suggestion": "移除中间层，直接调用",
+      "checkType": "middle-man"
+    },
+    {
+      "id": "SMELL-018",
+      "category": "Library Classes",
+      "severity": "warning",
+      "name": "Incomplete Library Class (不完整的库类)",
+      "description": "使用了库类但没有充分利用其功能",
+      "suggestion": "考虑封装或扩展库类",
+      "checkType": "library-usage"
+    },
+    {
+      "id": "SMELL-019",
+      "category": "Data",
+      "severity": "error",
+      "name": "Alternative Classes with Different Interfaces (重复类)",
+      "description": "功能相同但接口不同的类",
+      "suggestion": "统一接口，合并类",
+      "checkType": "duplicate-class"
+    },
+    {
+      "id": "SMELL-020",
+      "category": "Data",
+      "severity": "warning",
+      "name": "Primitive Obsession (基本类型偏执)",
+      "description": "过度使用基本类型而非值对象",
+      "suggestion": "创建值对象封装相关逻辑",
+      "checkType": "primitive-obsession"
+    },
+    {
+      "id": "SMELL-021",
+      "category": "Data",
+      "severity": "warning",
+      "name": "Data Clumps (数据泥团)",
+      "description": "经常一起出现的数据项",
+      "suggestion": "提取为类或结构体",
+      "checkType": "data-clumps"
+    },
+    {
+      "id": "SMELL-022",
+      "category": "Data",
+      "severity": "error",
+      "name": "Magic Number (魔法数字)",
+      "description": "未解释的硬编码数字",
+      "suggestion": "定义为具名常量",
+      "checkType": "magic-number"
+    },
+    {
+      "id": "SMELL-023",
+      "category": "Error Handling",
+      "severity": "error",
+      "name": "Empty Catch Block (空 catch 块)",
+      "description": "捕获异常但不处理",
+      "suggestion": "添加适当的错误处理或日志",
+      "checkType": "empty-catch"
+    },
+    {
+      "id": "SMELL-024",
+      "category": "Error Handling",
+      "severity": "warning",
+      "name": "Generic Exception (通用异常)",
+      "description": "抛出或捕获过于通用的异常",
+      "suggestion": "使用具体的异常类型",
+      "checkType": "exception-type"
+    }
+  ]
+}

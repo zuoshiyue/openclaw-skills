@@ -1,0 +1,234 @@
+{
+  "name": "Clean Code Rules",
+  "version": "1.0.0",
+  "description": "基于 Clean Code 书籍的核心规则",
+  "rules": [
+    {
+      "id": "CC-VAR-001",
+      "category": "Variables",
+      "severity": "warning",
+      "name": "使用有意义的变量名",
+      "description": "变量名应该清晰表达其用途，避免单字母命名（循环计数器除外）",
+      "badExample": "const yyyymmdstr = moment().format('YYYY/MM/DD');",
+      "goodExample": "const currentDate = moment().format('YYYY/MM/DD');",
+      "checkType": "naming"
+    },
+    {
+      "id": "CC-VAR-002",
+      "category": "Variables",
+      "severity": "warning",
+      "name": "同一类型变量使用相同词汇",
+      "description": "获取用户信息应该统一使用 getUser，而不是混用 getUserInfo、getClientData 等",
+      "badExample": "getUserInfo(); getClientData(); getCustomerRecord();",
+      "goodExample": "getUser(); getUser(); getUser();",
+      "checkType": "naming"
+    },
+    {
+      "id": "CC-VAR-003",
+      "category": "Variables",
+      "severity": "error",
+      "name": "避免魔法数字",
+      "description": "硬编码的数字应该定义为具名常量",
+      "badExample": "setTimeout(blastOff, 86400000);",
+      "goodExample": "const MILLISECONDS_PER_DAY = 86400000; setTimeout(blastOff, MILLISECONDS_PER_DAY);",
+      "checkType": "magic-number"
+    },
+    {
+      "id": "CC-VAR-004",
+      "category": "Variables",
+      "severity": "warning",
+      "name": "避免心智映射",
+      "description": "变量名应该直白，不需要读者在脑中映射含义",
+      "badExample": "locations.forEach(l => { dispatch(l); });",
+      "goodExample": "locations.forEach(location => { dispatch(location); });",
+      "checkType": "naming"
+    },
+    {
+      "id": "CC-FUNC-001",
+      "category": "Functions",
+      "severity": "warning",
+      "name": "函数参数不超过 3 个",
+      "description": "参数过多说明函数职责过重，应该封装为对象",
+      "badExample": "function createMenu(title, body, buttonText, cancellable) {}",
+      "goodExample": "function createMenu({ title, body, buttonText, cancellable }) {}",
+      "checkType": "parameter-count",
+      "threshold": 3
+    },
+    {
+      "id": "CC-FUNC-002",
+      "category": "Functions",
+      "severity": "error",
+      "name": "函数应该只做一件事",
+      "description": "函数包含多个职责会导致难以测试和复用",
+      "badExample": "function emailClients(clients) { /* 查询 + 过滤 + 发送邮件 */ }",
+      "goodExample": "function emailActiveClients(clients) { clients.filter(isActiveClient).forEach(email); }",
+      "checkType": "single-responsibility"
+    },
+    {
+      "id": "CC-FUNC-003",
+      "category": "Functions",
+      "severity": "warning",
+      "name": "函数名应该说明做什么",
+      "description": "从函数名应该能清晰理解其功能",
+      "badExample": "function addToDate(date, month) {}",
+      "goodExample": "function addMonthToDate(month, date) {}",
+      "checkType": "naming"
+    },
+    {
+      "id": "CC-FUNC-004",
+      "category": "Functions",
+      "severity": "warning",
+      "name": "函数应该只有一个抽象层次",
+      "description": "函数内不应该混用高层业务逻辑和底层实现细节",
+      "badExample": "function parseCode() { /* 包含词法分析、语法分析、代码生成 */ }",
+      "goodExample": "function parseCode() { const tokens = tokenize(code); const tree = parse(tokens); }",
+      "checkType": "abstraction-level"
+    },
+    {
+      "id": "CC-FUNC-005",
+      "category": "Functions",
+      "severity": "error",
+      "name": "避免副作用",
+      "description": "函数不应该修改全局变量或传入的参数对象",
+      "badExample": "let name = ''; function split() { name = name.split(' '); }",
+      "goodExample": "function split(name) { return name.split(' '); }",
+      "checkType": "side-effect"
+    },
+    {
+      "id": "CC-FUNC-006",
+      "category": "Functions",
+      "severity": "warning",
+      "name": "不要使用布尔标志参数",
+      "description": "布尔参数说明函数在做多件事，应该拆分",
+      "badExample": "function createFile(name, temp) { if (temp) {} else {} }",
+      "goodExample": "function createFile(name) {} function createTempFile(name) {}",
+      "checkType": "boolean-flag"
+    },
+    {
+      "id": "CC-CODE-001",
+      "category": "Code Structure",
+      "severity": "error",
+      "name": "消除重复代码",
+      "description": "重复代码意味着需要多处修改，应该提取公共逻辑",
+      "badExample": "function showDevelopers() {} function showManagers() { /* 重复逻辑 */ }",
+      "goodExample": "function showEmployees() { /* 统一处理 */ }",
+      "checkType": "duplication"
+    },
+    {
+      "id": "CC-CODE-002",
+      "category": "Code Structure",
+      "severity": "warning",
+      "name": "移除死代码",
+      "description": "不再使用的代码应该删除，版本控制会保留历史",
+      "badExample": "function oldRequest() {} function newRequest() {} // 只用 newRequest",
+      "goodExample": "function newRequest() {} // 删除旧函数",
+      "checkType": "dead-code"
+    },
+    {
+      "id": "CC-CODE-003",
+      "category": "Code Structure",
+      "severity": "warning",
+      "name": "封装条件判断",
+      "description": "复杂条件应该提取为具名函数",
+      "badExample": "if (fsm.state === 'fetching' && isEmpty(listNode)) {}",
+      "goodExample": "if (shouldShowSpinner(fsm, listNode)) {}",
+      "checkType": "conditional"
+    },
+    {
+      "id": "CC-CODE-004",
+      "category": "Code Structure",
+      "severity": "warning",
+      "name": "避免否定式条件",
+      "description": "肯定式表达更易理解",
+      "badExample": "if (!isDOMNodeNotPresent(node)) {}",
+      "goodExample": "if (isDOMNodePresent(node)) {}",
+      "checkType": "conditional"
+    },
+    {
+      "id": "CC-CODE-005",
+      "category": "Code Structure",
+      "severity": "info",
+      "name": "优先使用函数式编程",
+      "description": "使用 map/filter/reduce 替代命令式循环",
+      "badExample": "for (let i = 0; i < arr.length; i++) { total += arr[i]; }",
+      "goodExample": "const total = arr.reduce((sum, x) => sum + x, 0);",
+      "checkType": "functional"
+    },
+    {
+      "id": "CC-OBJ-001",
+      "category": "Objects",
+      "severity": "warning",
+      "name": "使用 getter/setter",
+      "description": "封装对象属性便于添加验证和逻辑",
+      "badExample": "const obj = { balance: 0 }; obj.balance = 100;",
+      "goodExample": "function makeAccount() { let balance = 0; return { getBalance, setBalance }; }",
+      "checkType": "encapsulation"
+    },
+    {
+      "id": "CC-OBJ-002",
+      "category": "Objects",
+      "severity": "warning",
+      "name": "对象应该有私有成员",
+      "description": "使用闭包保护内部状态",
+      "badExample": "function Employee(name) { this.name = name; }",
+      "goodExample": "function makeEmployee(name) { return { getName: () => name }; }",
+      "checkType": "encapsulation"
+    },
+    {
+      "id": "CC-CLS-001",
+      "category": "Classes",
+      "severity": "warning",
+      "name": "优先使用 ES6 类",
+      "description": "ES6 类语法更清晰易读",
+      "badExample": "function Animal() {} Animal.prototype = {};",
+      "goodExample": "class Animal {} class Mammal extends Animal {}",
+      "checkType": "class-syntax"
+    },
+    {
+      "id": "CC-CLS-002",
+      "category": "Classes",
+      "severity": "warning",
+      "name": "避免大型类",
+      "description": "类应该遵循单一职责原则",
+      "badExample": "class UserManager { /* 用户管理 + 邮件发送 + 日志记录 */ }",
+      "goodExample": "class UserManager {} class EmailService {} class Logger {}",
+      "checkType": "class-size"
+    },
+    {
+      "id": "CC-TEST-001",
+      "category": "Testing",
+      "severity": "error",
+      "name": "每个概念至少一个测试",
+      "description": "没有测试的代码无法保证质量",
+      "checkType": "test-coverage"
+    },
+    {
+      "id": "CC-TEST-002",
+      "category": "Testing",
+      "severity": "warning",
+      "name": "避免测试依赖",
+      "description": "测试应该独立可运行",
+      "checkType": "test-isolation"
+    },
+    {
+      "id": "CC-COMMENT-001",
+      "category": "Comments",
+      "severity": "warning",
+      "name": "注释应该解释为什么而不是做什么",
+      "description": "代码本身应该清晰表达做什么",
+      "badExample": "// 设置用户名为 John\nuser.name = 'John';",
+      "goodExample": "// 使用默认用户名，因为这是新用户注册流程\nuser.name = 'John';",
+      "checkType": "comment-quality"
+    },
+    {
+      "id": "CC-COMMENT-002",
+      "category": "Comments",
+      "severity": "warning",
+      "name": "避免注释掉的代码",
+      "description": "版本控制会保留历史，删除不要的代码",
+      "badExample": "// const oldFunction = () => {};",
+      "goodExample": "/* 已删除，历史中可查 */",
+      "checkType": "commented-code"
+    }
+  ]
+}
